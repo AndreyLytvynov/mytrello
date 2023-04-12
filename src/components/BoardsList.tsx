@@ -15,8 +15,8 @@ const BoardsList: React.FC = () => {
     if (destination) {
       dispatch(
         moveCard({
-          fromList: Number(source.droppableId),
-          toList: Number(destination.droppableId),
+          fromList: source.droppableId,
+          toList: destination.droppableId,
           fromIndex: source.index,
           toIndex: destination.index,
         })
@@ -26,13 +26,7 @@ const BoardsList: React.FC = () => {
 
   return (
     <Box w={"100%"}>
-      <Flex
-        as={"ul"}
-        alignItems={"flex-start"}
-        m={"0 auto"}
-        p={"10px"}
-        gap={"20px"}
-      >
+      <Flex as={"ul"} alignItems={"flex-start"} m={"0 auto"} gap={"20px"}>
         <DragDropContext onDragEnd={handleDropEnd}>
           {boards.map((board, index) => {
             return (

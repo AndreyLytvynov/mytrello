@@ -5,6 +5,8 @@ interface Lists {
   items: {
     id: string;
     title: string;
+    date: string;
+    name: string;
   }[];
 }
 
@@ -21,7 +23,18 @@ interface IMovePayload {
 
 interface IAddTodoPayload {
   boardIndex: number;
-  todo: string;
+  todoText: string;
+  date: string;
+  name: string;
+}
+interface IDeleteTodoPayload {
+  boardIndex: number;
+  id: string;
+}
+
+interface IUpdateTodoPayload extends IDeleteTodoPayload {
+  textTodo: string;
+  name: string;
 }
 
 const initialState: State = {
@@ -29,25 +42,23 @@ const initialState: State = {
     {
       title: "todo",
       items: [
-        { title: "todo1", id: "1" },
-        { title: "todo2", id: "2" },
-        { title: "todo3", id: "3" },
+        { title: "todo1", id: "1", date: "12.4.2023 23:58", name: "Andrey" },
+        { title: "todo2", id: "2", date: "12.4.2023 23:58", name: "Vika" },
+        { title: "todo3", id: "3", date: "12.4.2023 23:58", name: "Katya" },
       ],
     },
     {
       title: "doing",
       items: [
-        { title: "todo4", id: "4" },
-        { title: "todo5", id: "5" },
-        { title: "todo6", id: "6" },
+        { title: "todo4", id: "4", date: "12.4.2023 23:58", name: "polya" },
       ],
     },
     {
       title: "done",
       items: [
-        { title: "todo7", id: "7" },
-        { title: "todo8", id: "8" },
-        { title: "todo9", id: "9" },
+        { title: "todo7", id: "7", date: "12.4.2023 23:58", name: "Sveta" },
+        { title: "todo8", id: "8", date: "12.4.2023 23:58", name: "Vika" },
+        { title: "todo9", id: "9", date: "12.4.2023 23:58", name: "polya" },
       ],
     },
   ],
@@ -58,22 +69,11 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     moveCard: (state, action: PayloadAction<IMovePayload>) => {
-      console.log("payload", action.payload);
-      const stateCopy = state;
-      const item =
-        state.lists[action.payload.fromList].items[action.payload.fromIndex];
+      const { fromList, fromIndex, toList, toIndex } = action.payload;
 
-      stateCopy.lists[action.payload.fromList].items.splice(
-        action.payload.fromIndex,
-        1
-      );
-      stateCopy.lists[action.payload.toList].items.splice(
-        action.payload.toIndex,
-        0,
-        item
-      );
-
-      state = stateCopy;
+      const item = state.lists[fromList].items[fromIndex];
+      state.lists[fromList].items.splice(fromIndex, 1);
+      state.lists[toList].items.splice(toIndex, 0, item);
     },
     addBoard: (state, action: PayloadAction<string>) => {
       state.lists.push({
@@ -81,15 +81,40 @@ const boardSlice = createSlice({
         items: [],
       });
     },
+    deleteBoard: (state, action: PayloadAction<number>) => {
+      state.lists.splice(action.payload, 1);
+    },
     addTodo: (state, action: PayloadAction<IAddTodoPayload>) => {
       state.lists[action.payload.boardIndex].items.unshift({
-        title: action.payload.todo,
+        title: action.payload.todoText,
         id: Date.now().toString(),
+        date: action.payload.date,
+        name: action.payload.name,
       });
+    },
+    changeTodo: (state, action: PayloadAction<IUpdateTodoPayload>) => {
+      const { boardIndex, id, textTodo, name } = action.payload;
+      const items = state.lists[boardIndex].items;
+      state.lists[boardIndex].items = items.map((todo) => {
+        if (todo.id !== id) return todo;
+        return { ...todo, title: textTodo, name };
+      });
+    },
+    deleteTodo: (state, action: PayloadAction<IDeleteTodoPayload>) => {
+      const { boardIndex, id } = action.payload;
+      const items = state.lists[boardIndex].items;
+      state.lists[boardIndex].items = items.filter((item) => item.id !== id);
     },
   },
 });
 
-export const { addBoard, moveCard, addTodo } = boardSlice.actions;
+export const {
+  addBoard,
+  deleteBoard,
+  moveCard,
+  addTodo,
+  deleteTodo,
+  changeTodo,
+} = boardSlice.actions;
 
 export default boardSlice.reducer;

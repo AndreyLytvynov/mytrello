@@ -14,24 +14,31 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../hooks/redux";
-import { addTodo } from "../store/boardsSlice";
-import formateDate from "../helpers/formatDate";
+import { changeTodo } from "../store/boardsSlice";
 
 type IProps = {
   isOpen: boolean;
   onClose: () => void;
   boardIndex: number;
+  id: string;
+  executor: string;
+  title: string;
 };
 
-const AddTodoModal: React.FC<IProps> = ({ isOpen, onClose, boardIndex }) => {
-  const [todoText, setTodoText] = useState<string>("");
-  const [name, setName] = useState<string>("");
-
+const ChangeTodoModal: React.FC<IProps> = ({
+  isOpen,
+  onClose,
+  boardIndex,
+  id,
+  title,
+  executor,
+}) => {
+  const [textTodo, setTextTodo] = useState<string>(title);
+  const [name, setName] = useState<string>(executor);
   const dispatch = useAppDispatch();
 
-  const onClickAddBoard = () => {
-    const date = formateDate();
-    dispatch(addTodo({ boardIndex, todoText, date, name }));
+  const onChangeTodo = () => {
+    dispatch(changeTodo({ boardIndex, textTodo, name, id }));
   };
 
   return (
@@ -46,14 +53,14 @@ const AddTodoModal: React.FC<IProps> = ({ isOpen, onClose, boardIndex }) => {
               <FormLabel>Todo name</FormLabel>
               <Input
                 type="text"
-                value={todoText}
+                value={textTodo}
                 onChange={(e) => {
-                  setTodoText(e.target.value);
+                  setTextTodo(e.target.value);
                 }}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>name</FormLabel>
               <Input
                 type="text"
                 value={name}
@@ -65,8 +72,8 @@ const AddTodoModal: React.FC<IProps> = ({ isOpen, onClose, boardIndex }) => {
           </Stack>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="linkedin" onClick={onClickAddBoard}>
-            Add todo
+          <Button colorScheme="linkedin" onClick={onChangeTodo}>
+            Change todo
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -74,4 +81,4 @@ const AddTodoModal: React.FC<IProps> = ({ isOpen, onClose, boardIndex }) => {
   );
 };
 
-export default AddTodoModal;
+export default ChangeTodoModal;
