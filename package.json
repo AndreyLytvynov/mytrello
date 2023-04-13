@@ -1,7 +1,7 @@
 {
-  "name": "trelo",
+  "name": "trello",
   "version": "0.1.0",
-  "homepage": "https://AndreyLytvynov.github.io/mytrelo/",
+  "homepage": "https://AndreyLytvynov.github.io/mytrello/",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.18",
