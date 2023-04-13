@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mytrelo/static/css/main.44ab050b.css",
-    "main.js": "/mytrelo/static/js/main.7ac7ce0d.js",
+    "main.js": "/mytrelo/static/js/main.a35e58e1.js",
     "index.html": "/mytrelo/index.html",
     "main.44ab050b.css.map": "/mytrelo/static/css/main.44ab050b.css.map",
-    "main.7ac7ce0d.js.map": "/mytrelo/static/js/main.7ac7ce0d.js.map"
+    "main.a35e58e1.js.map": "/mytrelo/static/js/main.a35e58e1.js.map"
   },
   "entrypoints": [
     "static/css/main.44ab050b.css",
-    "static/js/main.7ac7ce0d.js"
+    "static/js/main.a35e58e1.js"
   ]
 }
