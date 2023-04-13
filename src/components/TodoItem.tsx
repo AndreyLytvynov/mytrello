@@ -1,7 +1,7 @@
 import { Flex, IconButton, Text, useDisclosure } from "@chakra-ui/react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 import { useAppDispatch } from "../hooks/redux";
-import { deleteTodo } from "../store/boardsSlice";
+import { deleteTodo } from "../store/todosSlice";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import ChangeTodoModal from "./ChangeTodoModal";
 

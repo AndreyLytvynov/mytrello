@@ -11,7 +11,7 @@ import {
 import { Droppable, DroppableProvided } from "react-beautiful-dnd";
 import AddTodoModal from "./AddTodoModal";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { deleteBoard } from "../store/boardsSlice";
+import { deleteBoard } from "../store/todosSlice";
 import { useAppDispatch } from "../hooks/redux";
 
 interface ITodoItem {

@@ -2,7 +2,7 @@ import Board from "./Board";
 import { useAppSelector } from "../hooks/redux";
 import { Box, Flex } from "@chakra-ui/react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { moveCard } from "../store/boardsSlice";
+import { moveCard } from "../store/todosSlice";
 import { useAppDispatch } from "../hooks/redux";
 
 const BoardsList: React.FC = () => {

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../hooks/redux";
-import { changeTodo } from "../store/boardsSlice";
+import { changeTodo } from "../store/todosSlice";
 
 type IProps = {
   isOpen: boolean;

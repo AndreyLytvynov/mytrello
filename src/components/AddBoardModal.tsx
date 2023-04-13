@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../hooks/redux";
-import { addBoard } from "../store/boardsSlice";
+import { addBoard } from "../store/todosSlice";
 
 type IProps = {
   isOpen: boolean;

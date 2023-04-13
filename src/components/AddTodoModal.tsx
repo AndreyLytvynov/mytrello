@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../hooks/redux";
-import { addTodo } from "../store/boardsSlice";
+import { addTodo } from "../store/todosSlice";
 import formateDate from "../helpers/formatDate";
 
 type IProps = {

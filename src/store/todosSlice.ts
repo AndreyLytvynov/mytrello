@@ -40,25 +40,66 @@ interface IUpdateTodoPayload extends IDeleteTodoPayload {
 const initialState: State = {
   lists: [
     {
-      title: "todo",
+      title: "Todo",
       items: [
-        { title: "todo1", id: "1", date: "12.4.2023 23:58", name: "Andrey" },
-        { title: "todo2", id: "2", date: "12.4.2023 23:58", name: "Vika" },
-        { title: "todo3", id: "3", date: "12.4.2023 23:58", name: "Katya" },
+        {
+          title: "Wash the dishes.",
+          id: "1",
+          date: "12.4.2023 23:58",
+          name: "Andrey",
+        },
+        {
+          title: "Take out the trash.",
+          id: "2",
+          date: "12.4.2023 23:58",
+          name: "Vika",
+        },
+        {
+          title: "Cook dinner.",
+          id: "3",
+          date: "12.4.2023 23:58",
+          name: "Katya",
+        },
       ],
     },
     {
-      title: "doing",
+      title: "Doing",
       items: [
-        { title: "todo4", id: "4", date: "12.4.2023 23:58", name: "polya" },
+        {
+          title: "Vacuum the floor.",
+          id: "4",
+          date: "12.4.2023 23:58",
+          name: "polya",
+        },
+        {
+          title: "Mop the floor.",
+          id: "5",
+          date: "12.4.2023 23:58",
+          name: "polya",
+        },
       ],
     },
     {
-      title: "done",
+      title: "Done",
       items: [
-        { title: "todo7", id: "7", date: "12.4.2023 23:58", name: "Sveta" },
-        { title: "todo8", id: "8", date: "12.4.2023 23:58", name: "Vika" },
-        { title: "todo9", id: "9", date: "12.4.2023 23:58", name: "polya" },
+        {
+          title: "Walk the dog.",
+          id: "7",
+          date: "12.4.2023 23:58",
+          name: "Sveta",
+        },
+        {
+          title: "Go to the store for groceries.",
+          id: "8",
+          date: "12.4.2023 23:58",
+          name: "Vika",
+        },
+        {
+          title: "Wash the windows.",
+          id: "9",
+          date: "12.4.2023 23:58",
+          name: "polya",
+        },
       ],
     },
   ],
