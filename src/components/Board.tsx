@@ -41,6 +41,7 @@ const Board: React.FC<IBoardProps> = ({ titleBoard, todoList, boardIndex }) => {
   const dispatch = useAppDispatch();
 
   const onChangeBoardName = () => {
+    if (title.length === 0) return;
     dispatch(changeBoard({ boardIndex, title }));
     setIsChangeBoard(!isChangeBoard);
   };
@@ -59,7 +60,7 @@ const Board: React.FC<IBoardProps> = ({ titleBoard, todoList, boardIndex }) => {
       flexDirection={"column"}
       justifyContent={"space-between"}
       minH={"100px"}
-      minW={{ base: "250px", xl: "250px" }}
+      minW={{ base: "200px", md: "250px" }}
       p={"10px"}
       backgroundColor={"gray.100"}
       borderTopRadius={"10px"}
@@ -67,10 +68,24 @@ const Board: React.FC<IBoardProps> = ({ titleBoard, todoList, boardIndex }) => {
       <Flex alignItems={"center"} justifyContent={"space-between"}>
         {isChangeBoard ? (
           <InputGroup size="sm" w={"174px"}>
-            <Input type="text" value={title} onChange={onChangeBoardTitle} />
-            <InputRightElement width="3rem">
-              <Button h="1.75rem" size="sm" onClick={onChangeBoardName}>
-                <EditIcon boxSize={3} />
+            <Input
+              onBlur={() => {
+                setIsChangeBoard(false);
+                onChangeBoardName();
+              }}
+              autoFocus={true}
+              type="text"
+              value={title}
+              onChange={onChangeBoardTitle}
+              variant="flushed"
+              fontSize={"lg"}
+              fontWeight={700}
+              placeholder={"Enter your name"}
+              _placeholder={{ fontSize: "10px" }}
+            />
+            <InputRightElement>
+              <Button h={0} minW={0} onClick={onChangeBoardName}>
+                <EditIcon boxSize={4} _hover={{ color: "blackAlpha.600" }} />
               </Button>
             </InputRightElement>
           </InputGroup>
@@ -136,9 +151,11 @@ const Board: React.FC<IBoardProps> = ({ titleBoard, todoList, boardIndex }) => {
           </>
         )}
       </Droppable>
+
       <Button colorScheme="facebook" onClick={onOpen}>
         Add todo
       </Button>
+
       <AddTodoModal isOpen={isOpen} onClose={onClose} boardIndex={boardIndex} />
     </Flex>
   );

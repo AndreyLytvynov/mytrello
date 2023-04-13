@@ -90,15 +90,13 @@ const TodoItem: React.FC<ITodoProps> = ({
               />
             </Flex>
           </Flex>
-          <Flex
-            justifyContent={"space-between"}
-            pr={"30px"}
-            alignItems={"center"}
-          >
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Text fontSize="12px" fontWeight={700}>
               {name}
             </Text>
-            <Text fontSize="10px">upd: {date}</Text>
+            <Text fontSize="10px" fontWeight={700}>
+              upd: {date}
+            </Text>
           </Flex>
         </Flex>
       )}

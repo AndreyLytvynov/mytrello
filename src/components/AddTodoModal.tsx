@@ -31,8 +31,11 @@ const AddTodoModal: React.FC<IProps> = ({ isOpen, onClose, boardIndex }) => {
   const dispatch = useAppDispatch();
 
   const onClickAddBoard = () => {
+    if (todoText.length === 0) return;
     const date = formateDate();
     dispatch(addTodo({ boardIndex, todoText, date, name }));
+    setName("");
+    setTodoText("");
   };
 
   return (

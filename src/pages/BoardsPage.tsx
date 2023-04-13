@@ -5,8 +5,10 @@ import AddBoardModal from "../components/AddBoardModal";
 const BoardsPage: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box backgroundColor={"blue.100"} px={"20px"}>
-      <Heading textAlign={"center"}>My Todo</Heading>
+    <Box backgroundColor={"blue.100"} px={"15px"}>
+      <Heading as={"h1"} textAlign={"center"}>
+        My Todos
+      </Heading>
       <Button onClick={onOpen} colorScheme="linkedin" mb={"10px"}>
         Add board
       </Button>

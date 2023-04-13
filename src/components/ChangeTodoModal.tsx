@@ -13,7 +13,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppDispatch } from "../hooks/redux";
 import { changeTodo } from "../store/todosSlice";
 
@@ -39,8 +39,15 @@ const ChangeTodoModal: React.FC<IProps> = ({
   const dispatch = useAppDispatch();
 
   const onChangeTodo = () => {
+    if (textTodo.length === 0) return;
     dispatch(changeTodo({ boardIndex, textTodo, name, id }));
+    onClose();
   };
+
+  useEffect(() => {
+    setTextTodo(title);
+    setName(executor);
+  }, [isOpen, title, executor]);
 
   return (
     <Modal onClose={onClose} isOpen={isOpen} isCentered>
@@ -57,10 +64,11 @@ const ChangeTodoModal: React.FC<IProps> = ({
                 onChange={(e) => {
                   setTextTodo(e.target.value);
                 }}
+                placeholder="Enter a task"
               />
             </FormControl>
             <FormControl>
-              <FormLabel>name</FormLabel>
+              <FormLabel>Name</FormLabel>
               <Input
                 type="text"
                 value={name}

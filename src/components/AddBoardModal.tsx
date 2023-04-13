@@ -26,6 +26,7 @@ const AddBoardModal: React.FC<IProps> = ({ isOpen, onClose }) => {
 
   const onClickAddBoard = () => {
     dispatch(addBoard(boardName));
+    setBoardName("");
   };
 
   return (
