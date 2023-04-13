@@ -26,7 +26,14 @@ const BoardsList: React.FC = () => {
 
   return (
     <Box w={"100%"}>
-      <Flex as={"ul"} alignItems={"flex-start"} m={"0 auto"} gap={"20px"}>
+      <Flex
+        alignItems={"flex-start"}
+        m={"0 auto"}
+        gap={"20px"}
+        overflowX={"auto"}
+        w={"100%"}
+        minH={"calc(100vh - 100px)"}
+      >
         <DragDropContext onDragEnd={handleDropEnd}>
           {boards.map((board, index) => {
             return (

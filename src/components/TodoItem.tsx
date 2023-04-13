@@ -36,16 +36,18 @@ const TodoItem: React.FC<ITodoProps> = ({
           {...provided.draggableProps}
           ref={provided.innerRef}
           backgroundColor={"white"}
-          p={"10px"}
+          p={"5px"}
           mb={"5px"}
           as={"li"}
-          minH={"70px"}
+          minH={"120px"}
           borderTopRadius={"5px"}
           flexDirection={"column"}
+          justifyContent={"space-between"}
         >
           <Flex justifyContent={"space-between"}>
             <Text
-              maxW={"170px"}
+              p={"5px"}
+              maxW={"190px"}
               overflowWrap="break-word"
               whiteSpace="normal"
               fontSize="xs"
@@ -88,9 +90,15 @@ const TodoItem: React.FC<ITodoProps> = ({
               />
             </Flex>
           </Flex>
-          <Flex justifyContent={"space-between"} pr={"30px"}>
-            <Text fontSize="10px">{name}</Text>
-            <Text fontSize="10px">{date}</Text>
+          <Flex
+            justifyContent={"space-between"}
+            pr={"30px"}
+            alignItems={"center"}
+          >
+            <Text fontSize="12px" fontWeight={700}>
+              {name}
+            </Text>
+            <Text fontSize="10px">upd: {date}</Text>
           </Flex>
         </Flex>
       )}

@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import boardReducer from "./todosSlice";
+import todosSlice from "./todosSlice";
 import {
   persistStore,
+  Persistor,
   persistReducer,
   PERSIST,
   REHYDRATE,
@@ -17,7 +18,7 @@ const contactsPersistConfig = {
   storage,
 };
 
-const tokenPersistReducer = persistReducer(contactsPersistConfig, boardReducer);
+const tokenPersistReducer = persistReducer(contactsPersistConfig, todosSlice);
 
 const store = configureStore({
   reducer: {
@@ -32,6 +33,6 @@ const store = configureStore({
 });
 
 export default store;
-export const persistor = persistStore(store);
+export const persistor: Persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

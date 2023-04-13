@@ -11,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Textarea,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../hooks/redux";
@@ -50,9 +51,8 @@ const ChangeTodoModal: React.FC<IProps> = ({
         <ModalBody>
           <Stack gap={"16px"} w="100%" as="form">
             <FormControl>
-              <FormLabel>Todo name</FormLabel>
-              <Input
-                type="text"
+              <FormLabel>Title</FormLabel>
+              <Textarea
                 value={textTodo}
                 onChange={(e) => {
                   setTextTodo(e.target.value);

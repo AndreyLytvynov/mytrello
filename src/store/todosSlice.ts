@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import formateDate from "../helpers/formatDate";
 
 interface Lists {
   title: string;
@@ -20,7 +21,6 @@ interface IMovePayload {
   toIndex: number;
   toList: number;
 }
-
 interface IAddTodoPayload {
   boardIndex: number;
   todoText: string;
@@ -31,10 +31,14 @@ interface IDeleteTodoPayload {
   boardIndex: number;
   id: string;
 }
-
 interface IUpdateTodoPayload extends IDeleteTodoPayload {
   textTodo: string;
   name: string;
+}
+
+interface IChangeBoardPayload {
+  boardIndex: number;
+  title: string;
 }
 
 const initialState: State = {
@@ -105,22 +109,18 @@ const initialState: State = {
   ],
 };
 
-const boardSlice = createSlice({
+const todosSlice = createSlice({
   name: "boards",
   initialState,
   reducers: {
-    moveCard: (state, action: PayloadAction<IMovePayload>) => {
-      const { fromList, fromIndex, toList, toIndex } = action.payload;
-
-      const item = state.lists[fromList].items[fromIndex];
-      state.lists[fromList].items.splice(fromIndex, 1);
-      state.lists[toList].items.splice(toIndex, 0, item);
-    },
     addBoard: (state, action: PayloadAction<string>) => {
       state.lists.push({
         title: action.payload,
         items: [],
       });
+    },
+    changeBoard: (state, action: PayloadAction<IChangeBoardPayload>) => {
+      state.lists[action.payload.boardIndex].title = action.payload.title;
     },
     deleteBoard: (state, action: PayloadAction<number>) => {
       state.lists.splice(action.payload, 1);
@@ -133,29 +133,44 @@ const boardSlice = createSlice({
         name: action.payload.name,
       });
     },
+
     changeTodo: (state, action: PayloadAction<IUpdateTodoPayload>) => {
       const { boardIndex, id, textTodo, name } = action.payload;
+
       const items = state.lists[boardIndex].items;
+
       state.lists[boardIndex].items = items.map((todo) => {
         if (todo.id !== id) return todo;
-        return { ...todo, title: textTodo, name };
+        return { ...todo, title: textTodo, name, date: formateDate() };
       });
     },
     deleteTodo: (state, action: PayloadAction<IDeleteTodoPayload>) => {
       const { boardIndex, id } = action.payload;
+
       const items = state.lists[boardIndex].items;
+
       state.lists[boardIndex].items = items.filter((item) => item.id !== id);
+    },
+    moveCard: (state, action: PayloadAction<IMovePayload>) => {
+      const { fromList, fromIndex, toList, toIndex } = action.payload;
+
+      const item = state.lists[fromList].items[fromIndex];
+      state.lists[fromList].items[fromIndex].date = formateDate();
+
+      state.lists[fromList].items.splice(fromIndex, 1);
+      state.lists[toList].items.splice(toIndex, 0, item);
     },
   },
 });
 
 export const {
   addBoard,
+  changeBoard,
   deleteBoard,
   moveCard,
   addTodo,
   deleteTodo,
   changeTodo,
-} = boardSlice.actions;
+} = todosSlice.actions;
 
-export default boardSlice.reducer;
+export default todosSlice.reducer;
